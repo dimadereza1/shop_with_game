@@ -1,19 +1,11 @@
-from flask import Flask, render_template, redirect, flash, url_for
+from flask import render_template, redirect, flash, url_for
 from .models import User, Products, db
 from .forms import LoginForm, RegForm
 from flask_login import LoginManager, logout_user, current_user
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '1234'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop_with_catalogue/shopss.db'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+from .config import app
 
 
 login = LoginManager(app)
-
-
-with app.app_context():
-    db.create_all()
 
 
 @login.user_loader

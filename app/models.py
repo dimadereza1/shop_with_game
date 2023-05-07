@@ -1,8 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from flask_migrate import Migrate
+from .config import app
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class User(db.Model, UserMixin):
