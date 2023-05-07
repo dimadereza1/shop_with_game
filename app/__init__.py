@@ -4,14 +4,16 @@ from .forms import LoginForm, RegForm
 from flask_login import LoginManager, logout_user, current_user
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = '1234'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop_with_catalogue/shopss.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
 login = LoginManager(app)
 
+
+with app.app_context():
+    db.create_all()
 
 
 @login.user_loader
@@ -28,7 +30,7 @@ def logout():
 @app.route('/index/', methods=['GET', 'POST'])
 def main():
     Produt = Products.query.all()
-    return render_template('index.html', title='BG')
+    return render_template('index.html', title='BG', prod=Produt)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -38,7 +40,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_pass(form.password.data):
-            flash('Неправильний пароль або логін ')
+            flash('Неправильний пароль a6o логін ')
             return redirect(url_for('login'))
         return redirect('index')
     return render_template('login.html', title='login', form=form) 
