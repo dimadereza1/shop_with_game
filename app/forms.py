@@ -8,7 +8,7 @@ class RegForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired('Не може бути пусте')])
     submit = SubmitField('Підтвердити')
 
-class LoginForm(FlaskForm):  # Для входу, треба html
+class LoginForm(FlaskForm):  
     username = StringField('Користувач', validators=[DataRequired('Не може бути пусте')])
     password = PasswordField('Пароль', validators=[DataRequired('Не може бути пусте')])
     submit = SubmitField('Підтвердити')
