@@ -3,5 +3,24 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block body %}
+<div class="container">
+    <div class="form text-center row justify-content-center">
+        <form action="" method="post" class="col-6 p-2 justify-content-center form-inline">
+            <h1 class="h3 mb-3 fw-normal">Registration</h1>
     
+            {{ form.hidden_tag() }}
+            {{ form.name.label }}
+            {{ form.name(class_='form-control') }}
+    
+            {{ form.hidden_tag() }}
+            {{ form.username.label }}
+            {{ form.username(class_='form-control') }}
+    
+            {{ form.password.label }}
+            {{ form.password(class_='form-control') }}
+        
+            {{ form.submit(class_='form-control my-3 col-sm-3') }}
+        </form>
+    </div>
+</div>
 {% endblock %}

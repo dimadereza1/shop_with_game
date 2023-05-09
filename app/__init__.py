@@ -19,7 +19,7 @@ def logout():
 
 
 @app.route('/', methods=['GET', 'POST']) 
-@app.route('/index/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def main():
     Produt = Products.query.all()
     return render_template('index.html', title='BG', prod=Produt)
@@ -28,7 +28,7 @@ def main():
 def login():
     form = LoginForm()
     if current_user.is_authenticated():
-        return redirect('index')
+        return redirect('/index')
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_pass(form.password.data):
