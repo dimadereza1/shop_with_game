@@ -27,14 +27,14 @@ def main():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm()
-    if current_user.is_authenticated():
-        return redirect('/index')
+    if current_user.is_authenticated:
+        return redirect('/')
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_pass(form.password.data):
             flash('Неправильний пароль a6o логін ')
             return redirect(url_for('login'))
-        return redirect('index')
+        return redirect(url_for('/index'))
     return render_template('login.html', title='login', form=form) 
 
 @app.route('/register', methods=['GET', 'POST'])

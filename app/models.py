@@ -28,4 +28,5 @@ class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name_prod = db.Column(db.String(120), index=True, unique=True)
     price = db.Column(db.Integer)
-    producer = db.Column(db.String)
+    genre = db.Column(db.String, index=True)
+    producer = db.Column(db.String, index=True)
