@@ -1,7 +1,7 @@
 from flask import render_template, redirect, flash, url_for
 from .models import User, Products, db
 from .forms import LoginForm, RegForm
-from flask_login import LoginManager, logout_user, current_user
+from flask_login import LoginManager, logout_user, current_user, login_user
 from .config import app
 
 
@@ -34,7 +34,8 @@ def login():
         if user is None or not user.check_pass(form.password.data):
             flash('Неправильний пароль a6o логін ')
             return redirect(url_for('login'))
-        return redirect(url_for('/index'))
+        login_user(user)
+        return redirect('index')
     return render_template('login.html', title='login', form=form) 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -48,3 +49,7 @@ def reg():
         flash('Ви зареєструвалися')
         return redirect(url_for('index'))
     return render_template('reg.html', form=form, title='Реєстрація')
+
+@app.route('/prodile')
+def prof():
+    return render_template('profile.html')

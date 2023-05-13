@@ -30,3 +30,4 @@ class Products(db.Model):
     price = db.Column(db.Integer)
     genre = db.Column(db.String, index=True)
     producer = db.Column(db.String, index=True)
+    year = db.Column(db.Integer, index=True)

@@ -3,3 +3,12 @@
     position: relative;
     left: 30px;
 }
+
+#df{
+    display: block;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
