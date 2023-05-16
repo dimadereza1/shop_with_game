@@ -3,6 +3,28 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block body %}
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Сортувати по
+    </button>
+    <ul class="dropdown-menu">
+      <li><button class="dropdown-item" type="button">Bce</button></li>
+      <li><button class="dropdown-item" type="button">По року випуску ↑</button></li>
+      <li><button class="dropdown-item" type="button">По року випуску ↓</button></li>
+      <li><button class="dropdown-item" type="button">По ціні ↑</button></li>
+      <li><button class="dropdown-item" type="button">По ціні ↓</button></li>
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Жанр
+        </button>
+        <ul class="dropdown-menu">
+            <li><button class="dropdown-item" type="button">Action</button></li>
+            <li><button class="dropdown-item" type="button">Horror</button></li>
+            <li><button class="dropdown-item" type="button">Racing</button></li>
+            <li><button class="dropdown-item" type="button">Simulator</button></li>
+        </ul>
+      </li>
+    </ul>
+</div>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
             {% for a in prod %}
