@@ -8,6 +8,14 @@
     display: block;
 }
 
+#year {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}
+
 *{
     margin: 0;
     padding: 0;
