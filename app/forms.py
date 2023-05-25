@@ -14,9 +14,9 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class AdminForm(FlaskForm):
-    name_prod = StringField('Name of product', validators=[DataRequired()])
-    price = IntegerField('Price', validators=[DataRequired()])
-    genre = StringField('Genre', validators=[DataRequired()])
-    producer = StringField('Producer', validators=[DataRequired()])
-    year = IntegerField('Year', validators=[DataRequired()])
+    name_prod = StringField("Ім'я гри", validators=[DataRequired()])
+    price = IntegerField('Ціна', validators=[DataRequired()])
+    genre = StringField('Жанр', validators=[DataRequired()])
+    producer = StringField('Виробник', validators=[DataRequired()])
+    year = IntegerField('Рік випуску', validators=[DataRequired()])
     submit = SubmitField('Підтвердити')

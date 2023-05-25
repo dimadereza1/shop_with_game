@@ -119,7 +119,8 @@ def for_ad():
     form = AdminForm()
     if current_user.username == 'Admin':
         if form.validate_on_submit():
-            add_prod = Products(name_prod=form.name_prod.data, price=form.price.data, producer=form.producer.data, year=form.year.data, genre=form.genre.data)
+            add_prod = Products(name_prod=form.name_prod.data, price=form.price.data, producer=form.producer.data, 
+                                year=form.year.data, genre=form.genre.data)
             db.session.add(add_prod)
             db.session.commit()
             return redirect('index')
