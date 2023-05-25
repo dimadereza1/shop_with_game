@@ -1,6 +1,6 @@
 from flask import render_template, redirect, flash, url_for
 from .models import User, Products, db
-from .forms import LoginForm, RegForm, AdminForm
+from .forms import LoginForm, RegForm, AdminForms
 from flask_login import LoginManager, logout_user, current_user, login_user
 from .config import app
 from sqlalchemy import desc
@@ -116,7 +116,7 @@ def prof():
 
 @app.route('/for_admin', methods=['GET', 'POST'])
 def for_ad():
-    form = AdminForm()
+    form = AdminForms()
     if current_user.username == 'Admin':
         if form.validate_on_submit():
             add_prod = Products(name_prod=form.name_prod.data, price=form.price.data, producer=form.producer.data, 

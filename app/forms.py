@@ -13,10 +13,10 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-class AdminForm(FlaskForm):
+class AdminForms(FlaskForm):
     name_prod = StringField("Ім'я гри", validators=[DataRequired()])
     price = IntegerField('Ціна', validators=[DataRequired()])
     genre = StringField('Жанр', validators=[DataRequired()])
     producer = StringField('Виробник', validators=[DataRequired()])
-    year = IntegerField('Рік випуску', validators=[DataRequired()])
+    yearr = IntegerField('Рік випуску', validators=[DataRequired()])
     submit = SubmitField('Підтвердити')
