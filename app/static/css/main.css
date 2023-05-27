@@ -16,6 +16,14 @@ a {
     text-decoration: none;
 }
 
+#tow {
+    display: none;
+}
+
+#bs {
+    display: none;
+}
+
 *{
     margin: 0;
     padding: 0;

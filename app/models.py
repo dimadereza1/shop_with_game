@@ -31,3 +31,12 @@ class Products(db.Model):
     genre = db.Column(db.String, index=True)
     producer = db.Column(db.String, index=True)
     year = db.Column(db.Integer, index=True)
+
+class Basket_db(db.Model):
+    __tablename__ = 'Basket'
+    id = db.Column(db.Integer, primary_key=True)
+    name_prod = db.Column(db.String(120), index=True, unique=True)
+    price = db.Column(db.Integer)
+    genre = db.Column(db.String, index=True)
+    producer = db.Column(db.String, index=True)
+    year = db.Column(db.Integer, index=True)

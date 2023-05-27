@@ -7,11 +7,18 @@
     <div class="form text-center row justify-content-center">
         <form action="" method="post" class="col-6 p-2 justify-content-center form-inline">
             {{ form.hidden_tag() }}
+            
             {{ form.username.label }}
             {{ form.username(class_='form-control') }}
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{error}}]</span>
+            {% endfor %}
 
             {{ form.password.label }}
             {{ form.password(class_='form-control') }}
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{error}}]</span>
+            {% endfor %}
 
             {{ form.submit(class_='form-control my-3 col-sm-3') }}
         </form>

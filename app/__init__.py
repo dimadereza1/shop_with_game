@@ -1,12 +1,13 @@
-from flask import render_template, redirect, flash, url_for
-from .models import User, Products, db
+from flask import render_template, redirect, flash, url_for, request
+from .models import User, Products, db, Basket_db
 from .forms import LoginForm, RegForm, AdminForms
-from flask_login import LoginManager, logout_user, current_user, login_user
+from flask_login import LoginManager, logout_user, current_user, login_user, login_required
 from .config import app
 from sqlalchemy import desc
 
 login = LoginManager(app)
 
+basket = []
 
 @login.user_loader
 def load_user(id):
@@ -22,6 +23,9 @@ def logout():
 @app.route('/index', methods=['GET', 'POST'])
 def main():
     Produt_All = Products.query.all()
+    if request.method == 'POST':
+        global basket
+        basket = request.form.get('value')
     return render_template('index.html', title='BG', prod=Produt_All)
 
 @app.route('/sorted_by_year_h', methods=['GET', 'POST'])
@@ -111,6 +115,7 @@ def reg():
     return render_template('reg.html', form=form, title='Реєстрація')
 
 @app.route('/prodile')
+@login_required
 def prof():
     return render_template('profile.html')
 
@@ -129,5 +134,7 @@ def for_ad():
     return render_template('for_admin.html', form=form, title='Додавання товарів')
 
 @app.route('/basket')
-def basket():
-    return render_template('basket.html')
+@login_required
+def basket1():
+    global basket
+    return render_template('basket.html', basket=basket)

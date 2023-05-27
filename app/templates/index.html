@@ -20,9 +20,11 @@
 
     </ul>
 </div>
+<div id="bs">{{ basket }}</div>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
             {% for a in prod %}
+                <div id="tow">{{ a }}</div>
                 <div class="col" id="df">
                     <div class="card mb-4 rounded-3 shadow-sm">
                         <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
@@ -32,7 +34,10 @@
                             <li>Виробник: {{ a.producer }}</li>
                             <li>Рік випуску: {{ a.year }}</li>
                         </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                        <form method="POST">
+                            <input type="hidden" id="inp" value="">
+                            <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_to_basket()">Buy</button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}

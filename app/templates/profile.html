@@ -3,5 +3,22 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block body %}
-    
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {% for a in basket %}
+            <div id="tow">{{ a }}</div>
+            <div class="col" id="df">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
+                    <h1 class="card-title pricing-card-title">₴ {{ a.price }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Жанр: {{ a.genre }}</li>
+                        <li>Виробник: {{ a.producer }}</li>
+                        <li>Рік випуску: {{ a.year }}</li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
