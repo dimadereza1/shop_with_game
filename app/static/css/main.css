@@ -24,6 +24,10 @@ a {
     display: none;
 }
 
+#font {
+    font-family: Impact;
+}
+
 *{
     margin: 0;
     padding: 0;

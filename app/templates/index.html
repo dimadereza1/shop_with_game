@@ -34,13 +34,19 @@
                             <li>Виробник: {{ a.producer }}</li>
                             <li>Рік випуску: {{ a.year }}</li>
                         </ul>
-                        <form method="POST">
-                            <input type="hidden" id="inp" value="">
-                            <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_to_basket()">Buy</button>
+                        <form action='/' method="POST">
+                            <input type="hidden" name='game' id="inp" value="">
+                            <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_tovar()">Buy</button>
                         </form>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+    <script>
+        function add_tovar() {
+    document.getElementById('inp').value = document.getElementById('tow').innerHtml;
+    console.log(document.getElementById('inp').value)
+}
+    </script>
 {% endblock %}

@@ -1,5 +1,5 @@
-let input = document.getElementById('inp').value, tovar = document.getElementById('tow');
-
 function add_tovar() {
-    input = tovar
+    document.getElementById('inp').value = document.getElementById('tow').innerHtml;
+    console.log(document.getElementById('inp').value)
 }
+

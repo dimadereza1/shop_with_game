@@ -5,10 +5,9 @@
 {% block body%}
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        {% if basket[0] is none %}
-            <h1>Нема товару</h1>
-        {% else %}
+        {% if basket %}
             {% for a in basket %}
+                <h1>{{ basket}}</h1>
                 <div class="col" id="df">
                     <div class="card mb-4 rounded-3 shadow-sm">
                         <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
@@ -21,6 +20,8 @@
                     </div>
                 </div>
             {% endfor %}
+        {% else %}
+            <h1>Нема товару</h1>
         {% endif %}
     </div>
 </div>

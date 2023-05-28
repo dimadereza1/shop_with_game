@@ -1,5 +1,5 @@
 from flask import render_template, redirect, flash, url_for, request
-from .models import User, Products, db, Basket_db
+from .models import User, Products, db
 from .forms import LoginForm, RegForm, AdminForms
 from flask_login import LoginManager, logout_user, current_user, login_user, login_required
 from .config import app
@@ -25,7 +25,7 @@ def main():
     Produt_All = Products.query.all()
     if request.method == 'POST':
         global basket
-        basket = request.form.get('value')
+        basket.append(Products.query.filter_by(name_prod=request.form.get('game')).first())
     return render_template('index.html', title='BG', prod=Produt_All)
 
 @app.route('/sorted_by_year_h', methods=['GET', 'POST'])
