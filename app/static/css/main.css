@@ -28,8 +28,15 @@ a {
     font-family: Impact;
 }
 
+#but {
+    border-radius: 15px;
+    background-color: blue;
+    text-decoration-color: rgb(0, 102, 255);
+}
+
 #bas {
-    background-color: rgb(79, 105, 200);
+    background-color: rgb(3, 21, 90);
+    border-radius: 10px;
     height: 100%;
     width: 280px;
     position: absolute;

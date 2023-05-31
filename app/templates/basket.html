@@ -3,19 +3,29 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block body%}
+<script>
+    function buy_bask () {
+        alert('товар замовлено')
+    }
+</script>
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
         {% if basket2 %}
             <div id="bas">
                 <p style="color: white;">Що в кошику</p><br>
                 {% for m in basket2 %}
                     <div style="color: white;">
-                        {{ m.name_prod }}     ₴ {{ m.price }}
+                        {{ m.name_prod }}  -   ₴ {{ m.price }}
+                        <form action="/bask/{{ m.id }}" method="post">
+                            <button type="submit" name="delete">✖</button>
+                        </form>
                     </div>
-                    <form action="/bask/{{ m.id }}" method="post">
-                        <button type="submit" name="delete">✖</button>
-                    </form>
+                    
                 {% endfor %}
+                <form action="/bask_buy" method="post">
+                    <button type="submit" name="buy" onclick="buy_bask()" id="but"><p style="color: aliceblue;">Купити</p></button>
+                </form>
             </div>
             {% for a in basket2 %}
                 <div class="col" id="df">
@@ -32,6 +42,7 @@
             {% endfor %}
         {% else %}
             <h1>Нема товару</h1>
+            <h1>{{ basket2 }} </h1>
         {% endif %}
     </div>
 </div>

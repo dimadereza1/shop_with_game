@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash, url_for, request
+from flask import render_template, redirect, flash, url_for, request, session
 from .models import User, Products, db
 from .forms import LoginForm, RegForm, AdminForms
 from flask_login import LoginManager, logout_user, current_user, login_user, login_required
@@ -6,8 +6,11 @@ from .config import app
 from sqlalchemy import desc
 
 login = LoginManager(app)
+app.app_context().push()
 
 basket = []
+const = []
+
 
 @login.user_loader
 def load_user(id):
@@ -23,10 +26,6 @@ def logout():
 @app.route('/index', methods=['GET', 'POST'])
 def main():
     Produt_All = Products.query.all()
-    if request.method == 'POST':
-        global basket
-        basket.append(Products.query.filter_by(id=request.form.get('game')).first())
-        print(request.form['game'])
     return render_template('index.html', title='BG', prod=Produt_All)
 
 @app.route('/sorted_by_year_h', methods=['GET', 'POST'])
@@ -100,7 +99,7 @@ def login():
             flash('Неправильний пароль a6o логін ')
             return redirect(url_for("login"))
         login_user(user)
-        return redirect('index')
+        return redirect('')
     return render_template('login.html', title='login', form=form) 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -112,13 +111,9 @@ def reg():
         db.session.add(user)
         db.session.commit()
         flash('Ви зареєструвалися')
-        return redirect(url_for('index'))
+        return redirect(url_for('main'))
     return render_template('reg.html', form=form, title='Реєстрація')
 
-@app.route('/prodile')
-@login_required
-def prof():
-    return render_template('profile.html')
 
 @app.route('/for_admin', methods=['GET', 'POST'])
 def for_ad():
@@ -129,11 +124,17 @@ def for_ad():
                                 year=form.year.data, genre=form.genre.data)
             db.session.add(add_prod)
             db.session.commit()
-            return redirect('index')
+            return redirect(url_for('main'))
     else:
         flash('Ви не є адміном!!!')
     return render_template('for_admin.html', form=form, title='Додавання товарів')
 
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def prof():
+    global const
+    return render_template('profile.html', const=const)
 
 
 @app.route('/bas/<int:id>', methods=['GET', 'POST'])
@@ -141,21 +142,33 @@ def for_ad():
 def add_basket(id):
     global basket
     posst = Products.query.filter_by(id=id).first()
-    basket.append(posst)
+    basket.append(id)
+
+    
     return redirect('/')
 
 @app.route('/bask/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_basket(id):
     global basket
-    posst = Products.query.filter_by(id=id).first()
-    print(basket)
-    print(posst)
-    basket.pop(basket.index(posst))
+
+    basket.remove(id)
     return redirect('/basket')
+
+@app.route('/bask_buy', methods=['GET', 'POST'])
+@login_required
+def buy_basket():
+    global basket
+    global const
+    const.append(basket)
+    basket.clear()
+    return redirect('/')
 
 @app.route('/basket', methods=['GET', 'POST'])
 @login_required
 def basket2():
     global basket
-    return render_template('basket.html', basket2=basket) 
+    bs = []
+    for i in basket:
+        bs.append(Products.query.filter_by(id=i).first())
+    return render_template('basket.html', basket2=bs) 
