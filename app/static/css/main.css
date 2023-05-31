@@ -24,8 +24,17 @@ a {
     display: none;
 }
 
-#font {
+#ne {
     font-family: Impact;
+}
+
+#bas {
+    background-color: rgb(79, 105, 200);
+    height: 100%;
+    width: 280px;
+    position: absolute;
+    left: 0%;
+    top: 8%;
 }
 
 *{

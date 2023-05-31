@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
             {% for a in prod %}
-                <div id="tow">{{ a }}</div>
+                <div id="tow">{{ a.id }}</div>
                 <div class="col" id="df">
                     <div class="card mb-4 rounded-3 shadow-sm">
                         <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
@@ -34,19 +34,17 @@
                             <li>Виробник: {{ a.producer }}</li>
                             <li>Рік випуску: {{ a.year }}</li>
                         </ul>
-                        <form action='/' method="POST">
-                            <input type="hidden" name='game' id="inp" value="">
-                            <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_tovar()">Buy</button>
-                        </form>
+                        {% if current_user.is_authenticated %}
+                            <form action='/bas/{{ a.id }}' method="POST">
+                                <input type="hidden" name='game' id="inp" value="">
+                                <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_tovar()">Buy</button>
+                            </form>
+                        {% else %}
+                            <p id="ne">Спочатку зареєструйтесь</p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
-    <script>
-        function add_tovar() {
-    document.getElementById('inp').value = document.getElementById('tow').innerHtml;
-    console.log(document.getElementById('inp').value)
-}
-    </script>
 {% endblock %}

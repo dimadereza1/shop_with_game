@@ -5,9 +5,19 @@
 {% block body%}
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        {% if basket %}
-            {% for a in basket %}
-                <h1>{{ basket}}</h1>
+        {% if basket2 %}
+            <div id="bas">
+                <p style="color: white;">Що в кошику</p><br>
+                {% for m in basket2 %}
+                    <div style="color: white;">
+                        {{ m.name_prod }}     ₴ {{ m.price }}
+                    </div>
+                    <form action="/bask/{{ m.id }}" method="post">
+                        <button type="submit" name="delete">✖</button>
+                    </form>
+                {% endfor %}
+            </div>
+            {% for a in basket2 %}
                 <div class="col" id="df">
                     <div class="card mb-4 rounded-3 shadow-sm">
                         <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>

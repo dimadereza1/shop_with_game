@@ -25,7 +25,8 @@ def main():
     Produt_All = Products.query.all()
     if request.method == 'POST':
         global basket
-        basket.append(Products.query.filter_by(name_prod=request.form.get('game')).first())
+        basket.append(Products.query.filter_by(id=request.form.get('game')).first())
+        print(request.form['game'])
     return render_template('index.html', title='BG', prod=Produt_All)
 
 @app.route('/sorted_by_year_h', methods=['GET', 'POST'])
@@ -133,8 +134,28 @@ def for_ad():
         flash('Ви не є адміном!!!')
     return render_template('for_admin.html', form=form, title='Додавання товарів')
 
-@app.route('/basket')
+
+
+@app.route('/bas/<int:id>', methods=['GET', 'POST'])
 @login_required
-def basket1():
+def add_basket(id):
     global basket
-    return render_template('basket.html', basket=basket)
+    posst = Products.query.filter_by(id=id).first()
+    basket.append(posst)
+    return redirect('/')
+
+@app.route('/bask/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_basket(id):
+    global basket
+    posst = Products.query.filter_by(id=id).first()
+    print(basket)
+    print(posst)
+    basket.pop(basket.index(posst))
+    return redirect('/basket')
+
+@app.route('/basket', methods=['GET', 'POST'])
+@login_required
+def basket2():
+    global basket
+    return render_template('basket.html', basket2=basket) 
