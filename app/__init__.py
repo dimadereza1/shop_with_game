@@ -96,10 +96,10 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_pass(form.password.data):
-            flash('Неправильний пароль a6o логін ')
+            flash('Неправильний пароль a6o логін')
             return redirect(url_for("login"))
         login_user(user)
-        return redirect('')
+        return redirect('/')
     return render_template('login.html', title='login', form=form) 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -133,12 +133,17 @@ def for_ad():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def prof():
-    global const
-    return render_template('profile.html', const=const)
+    const1 = User.query.filter_by(username=current_user.username).first()
+    hs = []
+    for i in str(const1.history):
+        m = Products.query.filter_by(id=i).first()
+
+        if i != ',' and i != ' ':
+            hs.append(m)
+    return render_template('profile.html', const=hs)
 
 
 @app.route('/bas/<int:id>', methods=['GET', 'POST'])
-@login_required
 def add_basket(id):
     global basket
     posst = Products.query.filter_by(id=id).first()
@@ -148,24 +153,32 @@ def add_basket(id):
     return redirect('/')
 
 @app.route('/bask/<int:id>', methods=['GET', 'POST'])
-@login_required
 def delete_basket(id):
     global basket
-
     basket.remove(id)
     return redirect('/basket')
 
 @app.route('/bask_buy', methods=['GET', 'POST'])
-@login_required
 def buy_basket():
     global basket
     global const
-    const.append(basket)
+    # for i in basket:
+    #     if isinstance(i, list):
+    #         for m in i:
+    #             const.append(Products.query.filter_by(id=m).first())
+    #     else:
+    #         const.append(Products.query.filter_by(id=i).first()) 
+    userrr = User.query.get(current_user.id)
+    for i in basket:
+        #const.append(Products.query.filter_by(id=i).first())
+        #userrr = User.query.get(current_user.id)
+        userrr.history
+    db.session.commit()
+    print(userrr.history)
     basket.clear()
     return redirect('/')
 
 @app.route('/basket', methods=['GET', 'POST'])
-@login_required
 def basket2():
     global basket
     bs = []

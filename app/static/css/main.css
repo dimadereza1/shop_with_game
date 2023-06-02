@@ -34,6 +34,14 @@ a {
     text-decoration-color: rgb(0, 102, 255);
 }
 
+#buy {
+    color: blue;
+    font-family: cursive;
+    position: absolute;
+    top: 10px;
+    left: 550px;
+}
+
 #bas {
     background-color: rgb(3, 21, 90);
     border-radius: 10px;

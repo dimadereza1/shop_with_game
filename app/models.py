@@ -3,9 +3,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_migrate import Migrate
 from .config import app
+from sqlalchemy.dialects.postgresql import ARRAY
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 
 
 class User(db.Model, UserMixin):
@@ -14,6 +16,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String, index=True)
     username = db.Column(db.String(130), index=True, unique=True)
     password_hash = db.Column(db.String)
+    history = db.Column(ARRAY(db.Integer))
 
     def gener_pass(self, password):
         self.password_hash = generate_password_hash(password)
