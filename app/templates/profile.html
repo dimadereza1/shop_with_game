@@ -3,22 +3,31 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        <h1 id="buy">Профіль</h1>
-        {% for a in const %}
-            <div class="col" id="df">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
-                    <h1 class="card-title pricing-card-title">₴ {{ a.price }}</h1>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>Жанр: {{ a.genre }}</li>
-                        <li>Виробник: {{ a.producer }}</li>
-                        <li>Рік випуску: {{ a.year }}</li>
-                    </ul>
+    <h1 id="buy">Профіль</h1>
+    <h1 style="position: relative;
+                left: 10px;">Історія покупок:</h1>
+    <div class="container" id="prof">
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            {% for a in const %}
+                <div class="col" id="df">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
+                        <h1 class="card-title pricing-card-title">₴ {{ a.price }}</h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Жанр: {{ a.genre }}</li>
+                            <li>Виробник: {{ a.producer }}</li>
+                            <li>Рік випуску: {{ a.year }}</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
+    <div id="profile_data">
+        <h2>Ваше ім'я: {{ us.name }}</h2>
+        <h4>username: {{ us.username }}</h4>    
+        <h2>Ваша статистика:</h2>
+        <h4>Витрачено грошей - ₴ {{ pr }}</h4>
+        <h4>Всього куплено товару - {{ many }}</h4>
+    </div>
 {% endblock %}

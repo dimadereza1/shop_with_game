@@ -135,12 +135,14 @@ def for_ad():
 def prof():
     const1 = User.query.filter_by(username=current_user.username).first()
     hs = []
+    price = []
     for i in const1.history:
         m = Products.query.filter_by(id=i).first()
-
+        price.append(m.price)
         if i != ',' and i != ' ':
             hs.append(m)
-    return render_template('profile.html', const=hs)
+    many = len(hs)
+    return render_template('profile.html', const=hs, us=const1, many=many, pr=sum(price))
 
 
 @app.route('/bas/<int:id>', methods=['GET', 'POST'])

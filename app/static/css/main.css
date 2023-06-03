@@ -6,6 +6,8 @@
 
 #df{
     display: block;
+    position: relative;
+    left: 40px;
 }
 
 #year {
@@ -39,17 +41,35 @@ a {
     font-family: cursive;
     position: absolute;
     top: 10px;
-    left: 550px;
+    left: 650px;
+}
+
+#prof {
+    position: absolute;
+    left: 10px;
+    top: 150px;
 }
 
 #bas {
     background-color: rgb(3, 21, 90);
     border-radius: 10px;
     height: 100%;
-    width: 280px;
+    width: 330px;
     position: absolute;
     left: 0%;
     top: 8%;
+}
+
+#profile_data {
+    font-family: cursive;
+    border: rgb(21, 96, 182) solid;
+    border-radius: 3px;
+    text-align: center;
+    width: 25%;
+    height: 30%;
+    position: absolute;
+    top: 150px;
+    left: 1375px;
 }
 
 *{
