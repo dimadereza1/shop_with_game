@@ -10,7 +10,7 @@ app.app_context().push()
 
 basket = []
 const = []
-
+o = []
 
 @login.user_loader
 def load_user(id):
@@ -106,7 +106,7 @@ def login():
 def reg():
     form = RegForm()
     if form.validate_on_submit():
-        user = User(name=form.name.data, username=form.username.data, password_hash=form.password.data)
+        user = User(name=form.name.data, username=form.username.data, password_hash=form.password.data, history={})
         user.gener_pass(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -121,7 +121,7 @@ def for_ad():
     if current_user.username == 'Admin':
         if form.validate_on_submit():
             add_prod = Products(name_prod=form.name_prod.data, price=form.price.data, producer=form.producer.data, 
-                                year=form.year.data, genre=form.genre.data)
+                                year=form.yearr.data, genre=form.genre.data)
             db.session.add(add_prod)
             db.session.commit()
             return redirect(url_for('main'))
@@ -135,7 +135,7 @@ def for_ad():
 def prof():
     const1 = User.query.filter_by(username=current_user.username).first()
     hs = []
-    for i in str(const1.history):
+    for i in const1.history:
         m = Products.query.filter_by(id=i).first()
 
         if i != ',' and i != ' ':
@@ -161,20 +161,16 @@ def delete_basket(id):
 @app.route('/bask_buy', methods=['GET', 'POST'])
 def buy_basket():
     global basket
-    global const
-    # for i in basket:
-    #     if isinstance(i, list):
-    #         for m in i:
-    #             const.append(Products.query.filter_by(id=m).first())
-    #     else:
-    #         const.append(Products.query.filter_by(id=i).first()) 
+    global o
     userrr = User.query.get(current_user.id)
+
+    o.extend(userrr.history)
     for i in basket:
-        #const.append(Products.query.filter_by(id=i).first())
-        #userrr = User.query.get(current_user.id)
-        userrr.history
+        if i not in o:
+            o.append(i)
+            userrr.history = o
     db.session.commit()
-    print(userrr.history)
+    o.clear()
     basket.clear()
     return redirect('/')
 
