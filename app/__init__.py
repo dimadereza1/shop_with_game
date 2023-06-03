@@ -111,7 +111,7 @@ def reg():
         db.session.add(user)
         db.session.commit()
         flash('Ви зареєструвалися')
-        return redirect(url_for('main'))
+        return redirect(url_for('login'))
     return render_template('reg.html', form=form, title='Реєстрація')
 
 
