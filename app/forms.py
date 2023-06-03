@@ -19,4 +19,5 @@ class AdminForms(FlaskForm):
     genre = StringField('Жанр', validators=[DataRequired()])
     producer = StringField('Виробник', validators=[DataRequired()])
     yearr = IntegerField('Рік випуску', validators=[DataRequired()])
+    img = StringField('Посилання на картинку', validators=[DataRequired()])
     submit = SubmitField('Підтвердити')

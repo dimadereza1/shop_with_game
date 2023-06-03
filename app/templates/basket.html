@@ -22,13 +22,15 @@
                     </div>
                     
                 {% endfor %}
+                <h6 style="color: white;">Сумма - ₴ {{ prc }}</h6>
                 <form action="/bask_buy" method="post">
-                    <button type="submit" name="buy" onclick="buy_bask()" id="but"><p style="color: aliceblue;">Купити</p></button>
+                    <button class="btn btn-primary rounded-pill px-3" type="submit" name="buy">Купити</button>
                 </form>
             </div>
             {% for a in basket2 %}
                 <div class="col" id="df">
                     <div class="card mb-4 rounded-3 shadow-sm">
+                        <img src="{{ a.image }}" class="im">
                         <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
                         <h1 class="card-title pricing-card-title">₴ {{ a.price }}</h1>
                         <ul class="list-unstyled mt-3 mb-4">
@@ -40,8 +42,10 @@
                 </div>
             {% endfor %}
         {% else %}
-            <h1>Нема товару</h1>
-            <h1>{{ basket2 }} </h1>
+            <div id="nn">
+                <h1>Нема товару</h1>
+                <h4>Але ти завжди можеш це виправити:)</h4>
+            </div>
         {% endif %}
     </div>
 </div>

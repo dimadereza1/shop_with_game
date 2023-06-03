@@ -8,31 +8,41 @@
       Сортувати по
     </button>
     <ul class="dropdown-menu">
-      <li><button class="dropdown-item" type="button"><a href="/index">Bce</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/sorted_by_year_h">По року випуску ↑</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/sorted_by_year_l">По року випуску ↓</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/sorted_by_price_h">По року випуску ↑</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/sorted_by_price_l">По року випуску ↓</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/action">Action</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/horror">Horror</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/racing">Racing</a></button></li>
-      <li><button class="dropdown-item" type="button"><a href="/simulators">Simulator</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/index" class="nav-link">Bce</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/sorted_by_year_h" class="nav-link">По року випуску ↑</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/sorted_by_year_l" class="nav-link">По року випуску ↓</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/sorted_by_price_h" class="nav-link">По ціні ↑</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/sorted_by_price_l" class="nav-link">По ціні ↓</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/action" class="nav-link">Action</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/horror" class="nav-link">Horror</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/racing" class="nav-link">Racing</a></button></li>
+      <li><button class="dropdown-item" type="button"><a href="/simulators" class="nav-link">Simulator</a></button></li>
 
     </ul>
 </div>
+<div id="bs">{{ basket }}</div>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
             {% for a in prod %}
+                <div id="tow">{{ a.id }}</div>
                 <div class="col" id="df">
                     <div class="card mb-4 rounded-3 shadow-sm">
+                        <img src="{{ a.image }}" class="im">
                         <h4 class="my-0 fw-normal">{{ a.name_prod }}</h4>
-                        <h1 class="card-title pricing-card-title">₴ {{ a.price }}</h1>
+                        <h3 class="card-title pricing-card-title">₴ {{ a.price }}</h3>
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>Жанр: {{ a.genre }}</li>
                             <li>Виробник: {{ a.producer }}</li>
                             <li>Рік випуску: {{ a.year }}</li>
                         </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Buy</button>
+                        {% if current_user.is_authenticated %}
+                            <form action='/bas/{{ a.id }}' method="POST">
+                                <input type="hidden" name='game' id="inp" value="">
+                                <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_tovar()">Купити</button>
+                            </form>
+                        {% else %}
+                            <p id="ne">Спочатку зареєструйтесь</p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

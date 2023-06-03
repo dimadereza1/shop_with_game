@@ -28,6 +28,7 @@ a {
 
 #ne {
     font-family: Impact;
+    color: red;
 }
 
 #but {
@@ -70,6 +71,19 @@ a {
     position: absolute;
     top: 150px;
     left: 1375px;
+}
+
+#nn {
+    font-family: cursive;
+    position: absolute;
+    top: 200px;
+    left: 600px;
+}
+
+.im {
+    width: 280px;
+    height: 400px;
+    align-self: center;
 }
 
 *{

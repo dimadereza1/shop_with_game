@@ -121,7 +121,7 @@ def for_ad():
     if current_user.username == 'Admin':
         if form.validate_on_submit():
             add_prod = Products(name_prod=form.name_prod.data, price=form.price.data, producer=form.producer.data, 
-                                year=form.yearr.data, genre=form.genre.data)
+                                year=form.yearr.data, genre=form.genre.data, image=form.img.data)
             db.session.add(add_prod)
             db.session.commit()
             return redirect(url_for('main'))
@@ -180,6 +180,9 @@ def buy_basket():
 def basket2():
     global basket
     bs = []
+    prc = []
     for i in basket:
-        bs.append(Products.query.filter_by(id=i).first())
-    return render_template('basket.html', basket2=bs) 
+        m = Products.query.filter_by(id=i).first()
+        bs.append(m)
+        prc.append(m.price)
+    return render_template('basket.html', basket2=bs, prc=sum(prc)) 

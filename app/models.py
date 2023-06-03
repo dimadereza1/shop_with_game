@@ -34,4 +34,4 @@ class Products(db.Model):
     genre = db.Column(db.String, index=True)
     producer = db.Column(db.String, index=True)
     year = db.Column(db.Integer, index=True)
-
+    image = db.Column(db.String)
