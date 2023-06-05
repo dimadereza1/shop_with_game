@@ -6,11 +6,12 @@ from .config import app
 from sqlalchemy import desc
 
 login = LoginManager(app)
-app.app_context().push()
 
 basket = []
 const = []
 o = []
+
+app.app_context().push()
 
 @login.user_loader
 def load_user(id):
@@ -26,7 +27,9 @@ def logout():
 @app.route('/index', methods=['GET', 'POST'])
 def main():
     Produt_All = Products.query.all()
-    return render_template('index.html', title='BG', prod=Produt_All)
+    bought_prod = User.query.filter_by(username=current_user.username).first()
+    global basket
+    return render_template('index.html', title='BG', prod=Produt_All, user_prod=bought_prod, basket=basket)
 
 @app.route('/sorted_by_year_h', methods=['GET', 'POST'])
 def main1():
@@ -99,7 +102,7 @@ def login():
             flash('Неправильний пароль a6o логін')
             return redirect(url_for("login"))
         login_user(user)
-        return redirect('/')
+        return redirect(url_for('main'))
     return render_template('login.html', title='login', form=form) 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -144,6 +147,12 @@ def prof():
     many = len(hs)
     return render_template('profile.html', const=hs, us=const1, many=many, pr=sum(price))
 
+@app.route('/del/<int:id>', methods=['GET', 'POST'])
+def del_tovar(id):
+    m = Products.query.filter_by(id=id).first()
+    db.session.delete(m)
+    db.session.commit()
+    return redirect(url_for('main'))
 
 @app.route('/bas/<int:id>', methods=['GET', 'POST'])
 def add_basket(id):

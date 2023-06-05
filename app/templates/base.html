@@ -23,17 +23,8 @@
       {% if current_user.is_authenticated %}
         <ul class="nav nav-pills">
           <li class="nav-item"><a href="/basket" class="nav-link">Корзина</a></li>
+          <li><a class="nav-item" href="/profile">Профіль</a></li>
         </ul>
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Меню
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/profile">Профіль(in progress...)</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/logout">Вийти з аккаунту</a></li>
-          </ul>
-        </div>
       {% else %}
         <ul class="nav nav-pills">
           <li class="nav-item"><a href="/login" class="nav-link active" aria-current="page">Login</a></li>

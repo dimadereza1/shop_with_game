@@ -35,11 +35,22 @@
                             <li>Виробник: {{ a.producer }}</li>
                             <li>Рік випуску: {{ a.year }}</li>
                         </ul>
-                        {% if current_user.is_authenticated %}
-                            <form action='/bas/{{ a.id }}' method="POST">
-                                <input type="hidden" name='game' id="inp" value="">
-                                <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_tovar()">Купити</button>
+                        {% if current_user.username == "Admin" %}
+                            <form action="/del/{{ a.id }}">
+                                <button id="butt" type="submit">✖</button>
                             </form>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                            {% if a.id in user_prod.history %}
+                                <p style="font-family: Impact;color: #2fff00;">Ви уже купили цей товар</p>
+                            {% elif a.id in basket %}
+                                <p style="font-family: Impact;color: rgb(120, 120, 0);">Товар в корзині</p>
+                            {% else %}
+                                <form action='/bas/{{ a.id }}' method="POST">
+                                    <input type="hidden" name='game' id="inp" value="">
+                                    <button type="submit" class="w-100 btn btn-lg btn-outline-primary" onclick="add_tovar()">Купити</button>
+                                </form>
+                            {% endif %}
                         {% else %}
                             <p id="ne">Спочатку зареєструйтесь</p>
                         {% endif %}
