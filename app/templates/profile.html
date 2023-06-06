@@ -30,5 +30,8 @@
         <h2>Ваша статистика:</h2>
         <h4>Витрачено грошей - ₴ {{ pr }}</h4>
         <h4>Всього куплено товару - {{ many }}</h4>
+        <form action="/logout" method="POST">
+            <button type="submit">Вийти з аккаунта</button>
+        </form>
     </div>
 {% endblock %}
