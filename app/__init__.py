@@ -11,7 +11,6 @@ basket = []
 const = []
 o = []
 
-app.app_context().push()
 
 @login.user_loader
 def load_user(id):
